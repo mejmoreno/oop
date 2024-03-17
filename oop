@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX_STUDENTS = 5;
+
+struct Student {
+    string admissionNumber;
+    string name;
+    int englishGrade;
+    int mathGrade;
+    int scienceGrade;
+    double average;
+};
+
+void displayStudent(const Student& student) {
+    cout << "Admission number: " << student.admissionNumber << endl;
+    cout << "Student name: " << student.name << endl;
+    cout << "English: " << student.englishGrade << endl;
+    cout << "Math: " << student.mathGrade << endl;
+    cout << "Science: " << student.scienceGrade << endl;
+    cout << "Average: " << student.average << endl << endl;
+}
+
+void calculateAverage(Student& student) {
+    student.average = (student.englishGrade + student.mathGrade + student.scienceGrade) / 3.0;
+}
+
+int main() {
+    Student students[MAX_STUDENTS];
+
+    for (int i = 0; i < MAX_STUDENTS; ++i) {
+        cout << "Enter admission number for student " << i + 1 << ": ";
+        cin >> students[i].admissionNumber;
+
+        cin.ignore(); // Clear input buffer
+        cout << "Enter student name: ";
+        getline(cin, students[i].name);
+
+        cout << "Enter grades in English, Math, Science: ";
+        cin >> students[i].englishGrade >> students[i].mathGrade >> students[i].scienceGrade;
+
+        calculateAverage(students[i]);
+    }
+
+    cout << "\nStudent Records:\n";
+    for (int i = 0; i < MAX_STUDENTS; ++i) {
+        cout << "Student " << i + 1 << ":\n";
+        displayStudent(students[i]);
+    }
+
+    return 0;
+}
